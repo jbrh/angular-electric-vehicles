@@ -1,0 +1,95 @@
+<!DOCTYPE html >
+<html lang="en"
+      ng-app="electricVehicles" >
+<head >
+	<title>Electric Vehicles</title >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link href="main.css" rel="stylesheet" >
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.7/angular-css.js" rel="stylesheet" >
+	<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+	
+</head >
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" >
+	<div class="container" >
+		<div class="navbar-header" >
+			<a class="navbar-brand">Electric Vehicles
+			</a >
+		</div >
+	</div >
+</nav >
+<br>
+
+<canvas id='c'></canvas>
+<script type="text/javascript" src="http://jsdo.it/akm2/fhMC/js"></script><!--http://cssdeck.com/labs/xq2cpb8s-->
+
+		<div class="col-md-4" style="float:left"
+		     ng-controller="LocationListController" >
+
+					<table class="table table-bordered" >
+
+						<tr >
+							<th>Click on Location to load place specific FRQ
+							</th >
+						</tr >
+
+						<tr ng-repeat="location in filteredLocations = (info.locations | orderBy:order)"
+						    ng-style="{'background-color': location.place == info.selectedLocation.place ? '#a8a8a8' : 'white'}"
+						    ng-click="info.selectedLocation = location" >
+							<td >{{ location.place }}</td >
+						</tr >
+
+					</table >
+
+				</div >
+
+		</div >
+		<div class="col-md-8" style="float:right">
+
+			<div ng-controller="LocationDetailController" class="panel panel-default">
+				<div class="panel-heading" >FRQ for ... {{ info.selectedLocation.place }}</div >
+				<div class="panel-body" >
+     		
+						<p >Electric vehicles often have been proposed as an environmentally sound alternative to the gasoline engine for transportation.  Several car manufacturers now include electric vehicles among their available models.  In spite of these initiatives, the penetration of electric vehicles into the transportation sector of <strong>{{ info.selectedLocation.place }}</strong> remains modest.</p>
+						
+						<br>
+						
+						<p>Estimate the potential reduction in petroleum consumption (in gallons of gasoline per year) that could be achieved in <strong>{{ info.selectedLocation.place }}</strong> by introducing electric vehicles under the following assumptions.  Be sure to show all your work and include units with your answers.</p>
+					
+						<br>
+						
+						<ul>
+  							<li > The average car gets <strong>{{ info.selectedLocation.milespergallon | number : fractionSize }}</strong> mpg.</li>
+  							<li > The average car is driven <strong>{{ info.selectedLocation.avgmilescardriven | number : fractionSize }}</strong> miles per year.</li>
+  							<li > <strong>{{ info.selectedLocation.carsincountry | number : fractionSize }}</strong> cars</li>
+  							<li > <strong>{{ info.selectedLocation.percentelectric | number : fractionSize }}</strong> percent of <strong>{{ info.selectedLocation.place }}'s</strong> cars could be replaced with electric vehicles.</li>
+  							<br>
+						</ul>
+					
+						<p>Calculate the number of kWh of electricity that can be produced in one year on the farm in {{ info.selectedLocation.place }} </p >
+						
+						
+						<div ng-controller="MyCtrl"><!--http://www.w3schools.com/angular/tryit.asp?filename=try_ng_events_toggle-->
+							<button class="btn" ng-click="myFunc()">Click to Show and Hide!</button>
+						
+							<br></br>
+					
+							<div>
+    							<span ng-animate="'animate'" ng-show="showMe" mathjax-bind="info.selectedLocation.question"></span>
+							</div> <!--http://jsfiddle.net/spicyj/ypqvp/-->
+						
+    				    </div>
+			</div >
+		</div >
+</div >
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-animate.min.js" ></script>
+<script src="main.js" ></script>
+<script src="animation.js" ></script>
+
+
+</body>
+</html >
+
